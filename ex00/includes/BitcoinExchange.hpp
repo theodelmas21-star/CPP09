@@ -6,7 +6,7 @@
 /*   By: tdelmas2 <tdelmas2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 11:56:27 by tdelmas2          #+#    #+#             */
-/*   Updated: 2026/06/25 18:11:17 by tdelmas2         ###   ########.fr       */
+/*   Updated: 2026/06/25 18:29:26 by tdelmas2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@
 
 class BitcoinExchange{
     private:
+    std::string _input;
+    
     void CheckFormat(std::string &Line, bool IsFirstLine, bool isCsv);
     std::string trim (const std::string &str);
     void CheckDate(std::string const &date) const;
@@ -30,12 +32,12 @@ class BitcoinExchange{
     bool LoadDatabase(const std::string &file, std::map<std::string, float> &database);
     
     public:
-    BitcoinExchange();
+    BitcoinExchange(std::string input);
     BitcoinExchange(BitcoinExchange const &src);
     BitcoinExchange &operator=(BitcoinExchange const &rhs);
     ~BitcoinExchange();
 
-    void Conversion(std::string input) const;
+    void Conversion(void);
 
     class DateValue : public std::exception
     {

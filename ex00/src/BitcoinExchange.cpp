@@ -6,7 +6,7 @@
 /*   By: tdelmas2 <tdelmas2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/24 21:39:07 by tdelmas2          #+#    #+#             */
-/*   Updated: 2026/06/25 18:11:25 by tdelmas2         ###   ########.fr       */
+/*   Updated: 2026/06/25 18:37:01 by tdelmas2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,7 +111,6 @@ bool BitcoinExchange::LoadDatabase(const std::string &filename, std::map<std::st
             std::string pricePart = trim(line.substr(commaPos + 1));
             float price;
             std::stringstream ss(pricePart);
-            ss >> price;
             if (!(ss >> price))
                 throw ValueFormat();
             database[datePart] = price;
@@ -122,20 +121,59 @@ bool BitcoinExchange::LoadDatabase(const std::string &filename, std::map<std::st
     file.close();
     return true;
 }
+
+void BitcoinExchange::Conversion(){
+    std::ifstream file(_input.c_str());
+    if (!file.is_open())
+    {
+        std::cout << "Error: could not open the file." << "\n";
+        return;
+    }
     
-BitcoinExchange::BitcoinExchange(){
+    std::string line;
+    bool isFirstLine = true;
+    std::map<std::string, float> database;
     
+    if (!LoadDatabase("data.csv", database))
+        return;
+    while (std::getline(file, line))
+    {
+        if (line.empty())
+            continue;
+        try
+        {
+            CheckFormat(line, isFirstLine, false);
+            if (isFirstLine) {
+                isFirstLine = false;
+                continue;
+            }
+            size_t pipePos = line.find('|');
+            std::string datePart = trim(line.substr(0, pipePos));
+            std::string pricePart = trim(line.substr(pipePos + 1));
+            float price;
+            std::stringstream ss(pricePart);
+            if (!(ss >> price))
+                throw ValueFormat();
+            
+        }
+        catch (const std::exception &e)
+        { std::cout << e.what() << "\n"; }
+    }
+    file.close();
+}
+    
+BitcoinExchange::BitcoinExchange(std::string input) : _input(input) {
 }
     
 BitcoinExchange::BitcoinExchange(BitcoinExchange const &src){
-    
+    _input = src._input;
 }
     
 BitcoinExchange &BitcoinExchange::operator=(BitcoinExchange const &rhs){
-    
+    if (this != &rhs)
+        _input = rhs._input;
 }
     
 BitcoinExchange::~BitcoinExchange(){
-    
 }
     
