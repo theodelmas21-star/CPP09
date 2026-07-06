@@ -6,7 +6,7 @@
 /*   By: tdelmas2 <tdelmas2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 11:56:15 by tdelmas2          #+#    #+#             */
-/*   Updated: 2026/07/06 14:47:23 by tdelmas2         ###   ########.fr       */
+/*   Updated: 2026/07/06 15:03:52 by tdelmas2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,12 @@ int main(int argc, char **argv)
     std::vector<std::string> args(argv + 1, argv + argc);
     PmergeMe vec;
 
-    
+    if (!vec.parser(args))
+    {
+        std::cout << "Error\n";
+        return 1;
+    }
+
     double timeVec = vec.measureTime(&PmergeMe::sort, args);
 
     

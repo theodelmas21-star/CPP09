@@ -165,18 +165,13 @@ void PmergeMe::pendToMain(void)
         if (_hasStraggler)
         {
             std::vector<int>::iterator it = std::lower_bound(_mainChain.begin(), _mainChain.end(), _straggler);
-            _mainChain.insert(it, _pendChain[curJacob - 1]);
+            _mainChain.insert(it, _straggler);
         }
     }
 }
 
 void PmergeMe::sort(std::vector<std::string> args)
 {
-    if (!parser(args))
-    {
-        std::cout << "Error" << '\n';
-        return;
-    }
     std::cout << "Before: ";
     printContainer<std::vector<std::string> >(args);
     fillPairs();

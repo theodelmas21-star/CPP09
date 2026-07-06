@@ -14,7 +14,6 @@
 #define RPN_HPP
 
 #include <cstdlib>
-#include <exception>
 #include <iostream>
 #include <vector>
 #include <set>
@@ -54,7 +53,6 @@ class PmergeMe
     std::cout << '\n';
   }
 
-  bool parser(std::vector<std::string> args);
   void fillPairs(void);
   void sortPairs(std::vector<std::pair<int, int> >& pairsVec);
   void mergePairs(std::vector<std::pair<int, int> >& left, 
@@ -70,22 +68,24 @@ class PmergeMe
     PmergeMe &operator=(PmergeMe const &rhs);
     ~PmergeMe();
 
+    bool parser(std::vector<std::string> args);
     void sort(std::vector<std::string> args);
     
     template <typename F>
     double measureTime(F sortFunction, std::vector<std::string> args)
     {
-    struct timeval start, end;
+      struct timeval start, end;
 
-    gettimeofday(&start, NULL);
-    (this->*sortFunction)(args);
-    gettimeofday(&end, NULL);
-    long seconds = end.tv_sec - start.tv_sec;
-    long microseconds = end.tv_usec - start.tv_usec;
-    double duration = (seconds * 1000000.0) + microseconds;
+      gettimeofday(&start, NULL);
+      
+      (this->*sortFunction)(args);
+      gettimeofday(&end, NULL);
+      long seconds = end.tv_sec - start.tv_sec;
+      long microseconds = end.tv_usec - start.tv_usec;
+      double duration = (seconds * 1000000.0) + microseconds;
 
-    return (duration);
-}
+      return (duration);
+    }
 };
 
 #endif
