@@ -166,7 +166,6 @@ class PmergeMe
             {
                 if (curJacob - 1 > 0)
                 {
-                    // 💡 NOTE : Ici, on extrait dynamiquement le type de l'itérateur du conteneur principal de l'état
                     typename StateType::A_type::iterator it =
                         std::lower_bound(state.mainChain.begin(), state.mainChain.end(), state.pendChain[curJacob - 1]);
                     state.mainChain.insert(it, state.pendChain[curJacob - 1]);
