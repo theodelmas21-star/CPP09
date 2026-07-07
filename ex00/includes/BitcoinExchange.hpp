@@ -13,25 +13,26 @@
 #ifndef BITCOINTEXCHANGE_HPP
 #define BITCOINTEXCHANGE_HPP
 
+#include <cctype>
+#include <exception>
 #include <fstream>
 #include <iostream>
-#include <exception>
-#include <string>
-#include <cctype>
 #include <map>
 #include <sstream>
+#include <string>
 
-class BitcoinExchange{
-    private:
+class BitcoinExchange
+{
+  private:
     std::string _input;
-    
+
     void CheckFormat(std::string &Line, bool IsFirstLine, bool isCsv);
-    std::string trim (const std::string &str);
+    std::string trim(const std::string &str);
     void CheckDate(std::string const &date) const;
     void CheckValue(std::string const &value) const;
     bool LoadDatabase(const std::string &file, std::map<std::string, float> &database);
-    
-    public:
+
+  public:
     BitcoinExchange(std::string input);
     BitcoinExchange(BitcoinExchange const &src);
     BitcoinExchange &operator=(BitcoinExchange const &rhs);
@@ -41,7 +42,7 @@ class BitcoinExchange{
 
     class DateValue : public std::exception
     {
-        public:
+      public:
         virtual const char *what() const throw()
         {
             return "Error: The indication 'date | value' must be the first line of the document.";
@@ -49,7 +50,7 @@ class BitcoinExchange{
     };
     class Negative : public std::exception
     {
-        public:
+      public:
         virtual const char *what() const throw()
         {
             return "Error: Not a positive number.";
@@ -57,7 +58,7 @@ class BitcoinExchange{
     };
     class GoodExample : public std::exception
     {
-        public:
+      public:
         virtual const char *what() const throw()
         {
             return "Error: The good format is : 'YYYY-MM-DD | value.";
@@ -65,13 +66,12 @@ class BitcoinExchange{
     };
     class ValueFormat : public std::exception
     {
-        public:
+      public:
         virtual const char *what() const throw()
         {
             return "Error: The value format isn't correct";
         }
     };
 };
-
 
 #endif

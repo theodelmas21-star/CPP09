@@ -6,18 +6,17 @@
 /*   By: tdelmas2 <tdelmas2@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 11:56:15 by tdelmas2          #+#    #+#             */
-/*   Updated: 2026/06/29 16:47:34 by tdelmas2         ###   ########.fr       */
+/*   Updated: 2026/06/30 15:55:47 by tdelmas2         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/RPN.hpp"
-#include <iostream>
 
 int main(int argc, char **argv)
 {
     if (argc != 2)
     {
-        std::cerr << "Error." << std::endl;
+        std::cerr << "Error." << '\n';
         return 1;
     }
     try

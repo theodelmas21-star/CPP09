@@ -32,7 +32,8 @@ RPN::~RPN()
 {
 }
 
-void RPN::Calculs(void){
+void RPN::Calculs(void)
+{
     std::stack<int> stack;
     bool needSpace = false;
 
@@ -41,12 +42,12 @@ void RPN::Calculs(void){
         int topValue;
         int secondValue;
 
-       if ((_input[i] >= '0' && _input[i] <= '9') && needSpace == false)
-       {
+        if ((_input[i] >= '0' && _input[i] <= '9') && needSpace == false)
+        {
             stack.push(_input[i] - '0');
             needSpace = true;
-       }
-       else if (needSpace == false)
+        }
+        else if (needSpace == false)
         {
             if (stack.size() < 2)
                 throw Error();
@@ -54,25 +55,25 @@ void RPN::Calculs(void){
             stack.pop();
             secondValue = stack.top();
             stack.pop();
-            switch(_input[i])
+            switch (_input[i])
             {
-                case '+':
-                    stack.push(secondValue + topValue);
-                    break;
-                case '-':
-                    stack.push(secondValue - topValue);
-                    break;
-                case '*':
-                        stack.push(secondValue * topValue);
-                        break;
-                case '/':
-                    if (topValue == 0)
-                        throw Error();
-                    stack.push(secondValue / topValue);
-                    break;
-                default:
+            case '+':
+                stack.push(secondValue + topValue);
+                break;
+            case '-':
+                stack.push(secondValue - topValue);
+                break;
+            case '*':
+                stack.push(secondValue * topValue);
+                break;
+            case '/':
+                if (topValue == 0)
                     throw Error();
-                    break;
+                stack.push(secondValue / topValue);
+                break;
+            default:
+                throw Error();
+                break;
             }
             needSpace = true;
         }
@@ -86,4 +87,3 @@ void RPN::Calculs(void){
     else
         throw Error();
 }
-

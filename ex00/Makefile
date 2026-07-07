@@ -2,7 +2,8 @@ NAME = btc
 CXX = c++
 CXXFLAGS = -Wall -Wextra -Werror -std=c++98
 
-MY_SOURCES = srcs/main.cpp
+MY_SOURCES = srcs/main.cpp \
+			 srcs/BitcoinExchange.cpp
              
 MY_OBJECTS = $(MY_SOURCES:srcs/%.cpp=obj/%.o)
 

@@ -13,10 +13,10 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <cstdlib>
+#include <exception>
 #include <iostream>
 #include <stack>
-#include <exception>
-#include <cstdlib>
 
 class RPN
 {
