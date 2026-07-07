@@ -82,19 +82,6 @@ class PmergeMe
         }
     }
 
-    template <typename PairContainer> void sortPairs(PairContainer &pairs)
-    {
-        if (pairs.size() <= 1)
-            return;
-        size_t mid = pairs.size() / 2;
-        PairContainer left(pairs.begin(), pairs.begin() + mid);
-        PairContainer right(pairs.begin() + mid, pairs.end());
-
-        sortPairs(left);
-        sortPairs(right);
-        mergePairs(left, right, pairs);
-    }
-
     template <typename PairContainer> void mergePairs(PairContainer &left, PairContainer &right, PairContainer &result)
     {
         size_t i = 0, j = 0;
@@ -116,6 +103,19 @@ class PmergeMe
             result.push_back(left[i]);
         for (; j < right.size(); j++)
             result.push_back(right[j]);
+    }
+
+    template <typename PairContainer> void sortPairs(PairContainer &pairs)
+    {
+        if (pairs.size() <= 1)
+            return;
+        size_t mid = pairs.size() / 2;
+        PairContainer left(pairs.begin(), pairs.begin() + mid);
+        PairContainer right(pairs.begin() + mid, pairs.end());
+
+        sortPairs(left);
+        sortPairs(right);
+        mergePairs(left, right, pairs);
     }
 
     template <typename StateType> void separateChains(StateType &state)
