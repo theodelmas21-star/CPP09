@@ -21,7 +21,8 @@
 #include <sys/time.h>
 #include <vector>
 
-template <template <typename, typename> class ContainerTemplate, typename T> struct SortState
+template <template <typename, typename> class ContainerTemplate, typename T> 
+struct SortState
 {
     typedef ContainerTemplate<T, std::allocator<T> > A_type;
 
